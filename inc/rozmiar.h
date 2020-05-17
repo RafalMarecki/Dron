@@ -1,0 +1,1 @@
+#define rozmiar 3;
