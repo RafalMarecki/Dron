@@ -6,6 +6,9 @@
 #include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Bryla.hh"
 #include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Prostopadloscian.hh"
 #include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Dron.hh"
+#include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Plaszczyzna.hh"
+#include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Dno.hh"
+#include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Tafla_wody.hh"
 
 using drawNS::Draw3DAPI;
 using std::shared_ptr;
@@ -24,18 +27,28 @@ void wait4key() {
 }
 
 int main() {
-  shared_ptr<Draw3DAPI> api(new APIGnuPlot3D(-100,100,-100,100,-100,100,1000)); //włacza gnuplota, pojawia się scena [-5,5] x [-5,5] x [-5,5] odświeżana co 1000 ms
+  shared_ptr<Draw3DAPI> api(new APIGnuPlot3D(-100,100,-100,100,-100,100,1000)); 
   Dron droniarz (20,50,20);
-  //Wektor3D A (65,56,86);
-  api->change_ref_time_ms(0); //odświeżanie sceny zmienione na opcję "z każdym pojawieniem się lub zniknięciem kształtu"
+  Dno dno;
+  Tafla tafla;
+
+  api->change_ref_time_ms(0); //odświeżanie z ze zniknieciem i pojawieniem
+  
+  tafla.rysuj(api);
+  dno.rysuj(api);
   int a = droniarz.rysuj(api);
+
   wait4key();
+  droniarz.Obrot_AnimZ (api,45);
   droniarz.Przesun_Anim (api, 20, 45);
   wait4key();
   droniarz.Obrot_AnimZ (api,45);
-  wait4key();
   droniarz.Przesun_Anim (api, 20, -45);
   wait4key();
+  droniarz.Obrot_AnimZ(api, 60);
+  droniarz.Przesun_Anim (api, 20, 90);
+  wait4key();
+ 
   
   /*
   std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-5,5,-5,5,-5,5,1000)); //włacza gnuplota, pojawia się scena [-5,5] x [-5,5] x [-5,5] odświeżana co 1000 ms

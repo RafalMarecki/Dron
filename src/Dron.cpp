@@ -85,7 +85,7 @@ void Dron::Obrot_AnimZ (shared_ptr<Draw3DAPI> api, double kat)
     {    
         int dron = (*this).rysuj(api);
         (*this).ObrotZ(1);
-        if (kat - i > 1)
+        //if (kat - i > 1)
         api-> erase_shape(dron); 
     }
 }

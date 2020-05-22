@@ -8,7 +8,6 @@
 using drawNS::Point3D;
 using drawNS::APIGnuPlot3D;
 using drawNS::Draw3DAPI;
-using std::vector;
 using namespace std;
 
 class Bryla
