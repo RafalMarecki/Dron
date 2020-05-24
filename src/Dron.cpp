@@ -1,5 +1,7 @@
 #include <iostream>
 #include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Dron.hh"
+#include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Wirnik.hh"
+#include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Bryla.hh"
 
 #define PI 3.14
 
@@ -10,9 +12,19 @@ Dron::Dron (double bokA, double bokB, double bokC)
         cerr<<"Wpisano ujemne wartosci bokow!"<<endl;
         exit(1);
     }
-    A=bokA; B=bokB; C=bokC;
+    A=bokA; B=bokB; C=bokC; /* Rozmiary i pozycja DRONA */
     Wektor3D tmp (A/2, B/2, C/2);
     PozycjaSrodka = tmp; 
+
+    Wirnik Lewy (A/4, C/4); /* Rozmiary, pozycja i orientacja WIRNIKOW */
+    Wirnik Prawy (A/4, C/4);
+    L = Lewy; P = Prawy;
+    Wektor3D SrodekL (0 , -A/4, 0);
+    Wektor3D SrodekP (0, A/4, 0);
+    L.ustaw_orientacja ((*this).Orientacja);
+    P.ustaw_orientacja ((*this).Orientacja);
+    L.ustaw_pozycja (SrodekL);
+    P.ustaw_pozycja (SrodekP);
 }
 
 void Dron::ObrotX (double kat)
@@ -30,7 +42,7 @@ void Dron::ObrotY (double kat)
 void Dron::ObrotZ (double kat)
 {
     MacierzObr tmp (kat, 'z');
-    Orientacja = tmp * Orientacja;// Orientacja * tmp;
+    Orientacja = tmp * Orientacja;
 }
 /*
 void Dron::przesun_o_wektor (Wektor3D & W)
@@ -114,6 +126,12 @@ void Dron::plyn (shared_ptr<Draw3DAPI> api, double odleglosc, double kat)
     } */
 }
 
+void Dron::narysuj (shared_ptr<Draw3DAPI> api)
+{
+    rysuj(api);
+    L.rysuj(api);
+    P.rysuj(api);
+}
 
 
 

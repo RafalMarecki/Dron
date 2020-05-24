@@ -9,6 +9,8 @@
 #include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Plaszczyzna.hh"
 #include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Dno.hh"
 #include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Tafla_wody.hh"
+#include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Graniastoslup.hh"
+#include "/home/rafaeldali/Pulpit/Dane do programów/droniarz/inc/Wirnik.hh"
 
 using drawNS::Draw3DAPI;
 using std::shared_ptr;
@@ -31,9 +33,11 @@ int main() {
   Dron droniarz (20,50,20);
   Dno dno;
   Tafla tafla;
+  Graniastoslup gran (20, 40);
 
   api->change_ref_time_ms(0); //odświeżanie z ze zniknieciem i pojawieniem
-  
+  droniarz.narysuj(api);
+  wait4key();
   tafla.rysuj(api);
   dno.rysuj(api);
   int a = droniarz.rysuj(api);

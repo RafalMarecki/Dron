@@ -3,8 +3,8 @@ CPPFLAGS= -c -g -Iinc -Wall -pedantic -std=c++17
 _start_: Dron
 	./Dron
 
-Dron: obj/Dr3D_gnuplot_api.o obj/example.o obj/Wektor.o obj/Macierz.o obj/Prostopadloscian.o obj/MacierzObr.o obj/Dron.o obj/Dno.o obj/Tafla_wody.o
-	g++ -o Dron obj/example.o obj/Dr3D_gnuplot_api.o obj/Wektor.o obj/Macierz.o obj/Prostopadloscian.o obj/MacierzObr.o obj/Dron.o obj/Dno.o obj/Tafla_wody.o -lpthread
+Dron: obj/Dr3D_gnuplot_api.o obj/example.o obj/Wektor.o obj/Macierz.o obj/Prostopadloscian.o obj/MacierzObr.o obj/Dron.o obj/Dno.o obj/Tafla_wody.o obj/Graniastoslup.o obj/Wirnik.o
+	g++ -o Dron obj/example.o obj/Dr3D_gnuplot_api.o obj/Wektor.o obj/Macierz.o obj/Prostopadloscian.o obj/MacierzObr.o obj/Dron.o obj/Dno.o obj/Tafla_wody.o obj/Graniastoslup.o obj/Wirnik.o -lpthread
 
 obj/example.o: src/example.cpp inc/Dr3D_gnuplot_api.hh
 	g++ ${CPPFLAGS} -o obj/example.o src/example.cpp
@@ -44,6 +44,18 @@ obj/Tafla_wody.o: src/Tafla_wody.cpp inc/Tafla_wody.hh
 
 inc/Tafla_wody.hh: inc/Plaszczyzna.hh	
 	touch inc/Tafla_wody.hh
+
+obj/Graniastoslup.o: src/Graniastoslup.cpp inc/Graniastoslup.hh 
+	g++ ${CPPFLAGS} -o obj/Graniastoslup.o src/Graniastoslup.cpp
+
+inc/Graniastoslup.hh: inc/Bryla.hh
+	touch inc/Graniastoslup.hh
+
+obj/Wirnik.o: src/Wirnik.cpp inc/Wirnik.hh 
+	g++ ${CPPFLAGS} -o obj/Wirnik.o src/Wirnik.cpp
+
+inc/Wirnik.hh: inc/Bryla.hh
+	touch inc/Wirnik.hh
 
 clear:
 	rm -f obj/*.o Dron

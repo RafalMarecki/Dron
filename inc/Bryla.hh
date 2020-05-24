@@ -14,19 +14,15 @@ class Bryla
 {
     protected:
     shared_ptr<Draw3DAPI> api;
-    int id;
+    int id = 0;
     Wektor3D PozycjaSrodka;
     Wektor3D Odniesienie;
     MacierzObr Orientacja;
 
     public:
-    void ustaw_pozycja (const Wektor3D & PozycjaSrodka);
-    void ustaw_orientacja (const MacierzObr &);    //
+    void ustaw_pozycja (const Wektor3D & srodek) {PozycjaSrodka = srodek;};
+    void ustaw_orientacja (const MacierzObr & orientacja) {Orientacja = orientacja;};
     virtual int rysuj(shared_ptr<Draw3DAPI>) = 0;
-    //virtual void rerysuj() = 0;
-    //Bryla() = delete;
-    //virtual void wymaz() = 0;
-
 };
 
 #endif
