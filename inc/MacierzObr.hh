@@ -9,11 +9,8 @@ using namespace std;
 class MacierzObr: public Macierz<double,3>
 {
     public:
-
-    MacierzObr(const Macierz<double,3> &M);
-
     MacierzObr();
-  
+    MacierzObr(const Macierz<double,3> &M);
     MacierzObr(double stopnie, char os);
   
 };

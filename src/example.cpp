@@ -30,29 +30,27 @@ void wait4key() {
 
 int main() {
   shared_ptr<Draw3DAPI> api(new APIGnuPlot3D(-100,100,-100,100,-100,100,1000)); 
-  Dron droniarz (20,50,20);
+  Dron droniarz (27,20,15);
   Dno dno;
   Tafla tafla;
-  Graniastoslup gran (20, 40);
 
   api->change_ref_time_ms(0); //odświeżanie z ze zniknieciem i pojawieniem
-  droniarz.narysuj(api);
-  wait4key();
   tafla.rysuj(api);
   dno.rysuj(api);
-  int a = droniarz.rysuj(api);
+  droniarz.plyn(api,45,45);
+  wait4key();
+  droniarz.plyn(api,45,-45);
+  wait4key();
+  droniarz.plyn(api,45,60);
+  wait4key();
+  
 
-  wait4key();
-  droniarz.Obrot_AnimZ (api,45);
-  droniarz.Przesun_Anim (api, 20, 45);
-  wait4key();
-  droniarz.Obrot_AnimZ (api,45);
-  droniarz.Przesun_Anim (api, 20, -45);
-  wait4key();
-  droniarz.Obrot_AnimZ(api, 60);
-  droniarz.Przesun_Anim (api, 20, 90);
-  wait4key();
- 
+
+
+
+
+
+
   
   /*
   std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-5,5,-5,5,-5,5,1000)); //włacza gnuplota, pojawia się scena [-5,5] x [-5,5] x [-5,5] odświeżana co 1000 ms

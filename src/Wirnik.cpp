@@ -9,8 +9,41 @@ Wirnik::Wirnik (double bok, double h)
     }
     Bok = bok;
     H = h;
-    Wektor3D srodek (Bok/2, Bok/2, H/2);
+    Wektor3D srodek (Bok/2, Bok/2, H/2); //to ostatnio bylo zakomentowane
     PozycjaSrodka = srodek;
+}
+
+void Wirnik::Set_Wymiary (double bok, double h) 
+{  
+    if (bok<0.0  || h<0.0)
+    {
+        cerr<<"Wpisano ujemne wymiary!"<<endl;
+        exit(1);
+    }
+    Bok = bok;
+    H = h;
+    Wektor3D srodek (Bok/2, Bok/2, H/2);//to ostatnio bylo zakomentowane
+    PozycjaSrodka = srodek;
+}
+
+void Wirnik::Przesun (double dlugosc)
+{
+    Wektor3D ruch (dlugosc,0,0);  
+    ruch = Obrot * ruch;  
+    ruch = Orientacja * ruch;
+    Odniesienie = Odniesienie + ruch;
+}
+
+void Wirnik::Obrot_Wirnik (double kat)
+{
+    MacierzObr XD (-kat, 'y');
+    ustaw_orientacja_razy(XD);
+}
+
+void Wirnik::Obrot_Wirnik (Wektor3D Odsuniecie, MacierzObr Orientacja_Drona, MacierzObr Orientacja_Wirnik) 
+{
+    Odniesienie = Odniesienie + (Orientacja_Drona * (Odsuniecie*(-1.0))) + ((Orientacja_Drona * Orientacja_Wirnik) * Odsuniecie);
+    ustaw_orientacja_razy(Orientacja_Wirnik);
 }
 
 void Wirnik::get_global_wspolrzedne (Wektor3D Wspolrzedne[]) const
@@ -64,12 +97,3 @@ int Wirnik::rysuj(shared_ptr<Draw3DAPI> api)
 	    }},"blue");
     return id;
 }
-/*
-void Wirnik::Przesun (double odleglosc)
-{
-    Wektor3D ruch (odleglosc, 0, 0);
-    ruch = Obrot * ruch;
-    ruch = Orientacja * ruch;
-    PozycjaSrodka = PozycjaSrodka + ruch;
-}
-*/

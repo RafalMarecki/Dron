@@ -18,13 +18,9 @@ class Prostopadloscian: public Bryla
 
     public:
     Prostopadloscian (double A, double B, double C);
-
     void ustaw_pozycja (const Wektor3D & Wektor); 
-
     void ustaw_orientacja (const MacierzObr & MacObrot);
-
     void get_global_wspolrzedne (Wektor3D wspolrzedne[]); //
-
     int rysuj(shared_ptr<Draw3DAPI>) override;
 
 

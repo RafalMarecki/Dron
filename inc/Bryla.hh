@@ -18,9 +18,11 @@ class Bryla
     Wektor3D PozycjaSrodka;
     Wektor3D Odniesienie;
     MacierzObr Orientacja;
+    Bryla () {};
 
     public:
-    void ustaw_pozycja (const Wektor3D & srodek) {PozycjaSrodka = srodek;};
+    void ustaw_pozycja (const Wektor3D & srodek) {Odniesienie = srodek;};
+    void ustaw_orientacja_razy (const MacierzObr & XD) {Orientacja = Orientacja * XD;};
     void ustaw_orientacja (const MacierzObr & orientacja) {Orientacja = orientacja;};
     virtual int rysuj(shared_ptr<Draw3DAPI>) = 0;
 };
