@@ -29,23 +29,27 @@ Dron::Dron (double bokA, double bokB, double bokC)
     Odsuniecie_P = Prawy;
     P.ustaw_pozycja(Prawy);
 }
-
+/*
 void Dron::ObrotX (double kat)
 {
     MacierzObr XD (-kat, 'x');
     ustaw_orientacja_razy(XD);
     L.ustaw_orientacja_razy(XD);
     P.ustaw_orientacja_razy(XD);
-    //L.Obrot_Wirnik (Odsuniecie_L, Orientacja, XD);
-    //P.Obrot_Wirnik (Odsuniecie_L, Orientacja, XD);
 }
-
+*/
 void Dron::ObrotY (double kat)
 {
     MacierzObr XD (-kat, 'y');
     ustaw_orientacja_razy(XD);
     L.ustaw_orientacja_razy(XD);
     P.ustaw_orientacja_razy(XD);
+    L.Krec_Wirnik (5);
+    P.Krec_Wirnik (-5);
+    //L.Obrot_Wirnik_Dron (PozycjaSrodka + Orientacja * Odsuniecie_L, Orientacja);
+    //P.Obrot_Wirnik_Dron (PozycjaSrodka + Orientacja * Odsuniecie_P, Orientacja);
+    //L.Obrot_Wirnik_Dron (Odsuniecie_L, XD, Orientacja);
+    //P.Obrot_Wirnik_Dron (Odsuniecie_P, XD, Orientacja);
 }
 
 void Dron::ObrotZ (double kat)
@@ -54,17 +58,27 @@ void Dron::ObrotZ (double kat)
     ustaw_orientacja_razy(XD);
     L.ustaw_orientacja_razy(XD);
     P.ustaw_orientacja_razy(XD);
-    //L.Obrot_Wirnik (Odsuniecie_L, Orientacja, XD);
-    //P.Obrot_Wirnik (Odsuniecie_P, Orientacja, XD);
+    if (kat>=0)
+    {
+        L.Krec_Wirnik (-5);
+        P.Krec_Wirnik (-5);
+    }
+    else
+    {
+        L.Krec_Wirnik (5);
+        P.Krec_Wirnik (5);
+    }
 }
 
 void Dron::Przesun(double dlugosc)
 {
     Wektor3D ruch (dlugosc, 0, 0);
     ruch = Orientacja * ruch;
-    Odniesienie = Odniesienie + ruch; //PozycjaSrodka
+    Odniesienie = Odniesienie + ruch; 
     P.Przesun(dlugosc);
     L.Przesun(dlugosc);
+    L.Krec_Wirnik(5);
+    P.Krec_Wirnik(-5);
 }
 
 void Dron::Przesun_Anim (shared_ptr<Draw3DAPI> api, double odleglosc)
@@ -99,7 +113,6 @@ void Dron::Obrot_AnimY (shared_ptr<Draw3DAPI> api, double kat)
         {    
             (*this).narysuj(api);
             (*this).ObrotY(1);
-            //if (kat - i > 1)
             api-> erase_shape((*this).id); 
         }
     }
@@ -109,7 +122,6 @@ void Dron::Obrot_AnimY (shared_ptr<Draw3DAPI> api, double kat)
         {    
             (*this).narysuj(api);
             (*this).ObrotY(-1);
-            //if (kat - i > 1)
             api-> erase_shape((*this).id); 
         }
     }
@@ -142,7 +154,7 @@ void Dron::Obrot_AnimZ (shared_ptr<Draw3DAPI> api, double kat)
 void Dron::plyn (shared_ptr<Draw3DAPI> api, double odleglosc, double kat)
 {
     (*this).Obrot_AnimY(api,kat);
-    (*this).Przesun_Anim (api, odleglosc);
+    (*this).Przesun_Anim (api,odleglosc);
     (*this).Obrot_AnimY(api,-kat);
     (*this).narysuj(api);
 }
@@ -153,6 +165,10 @@ void Dron::narysuj (shared_ptr<Draw3DAPI> api)
     L.rysuj(api);
     P.rysuj(api);
 }
+/*
+bool Dron::czy_kolizja (shared_ptr<Interfejs> X)
+{}
+*/
 
 
 
@@ -168,8 +184,31 @@ void Dron::narysuj (shared_ptr<Draw3DAPI> api)
 
 
 
-
-
+/*
+void Dron::Przesun_Anim (shared_ptr<Draw3DAPI> api, double odleglosc)
+{
+    if (odleglosc >= 0)
+    {
+        for (int j=0; j<odleglosc; j++)
+        {   
+            (*this).Przesun(1); 
+            (*this).narysuj(api); 
+            if (odleglosc - j > 1)
+            api-> erase_shape((*this).id); 
+        } 
+    }
+    else
+    {
+        for (int j=odleglosc; j<0; j++)
+        {   
+            (*this).Przesun(-1); 
+            (*this).narysuj(api); 
+            if (j < -1)
+            api-> erase_shape((*this).id); 
+        } 
+    }
+}
+*/
 
 
 /*

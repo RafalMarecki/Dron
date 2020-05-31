@@ -3,8 +3,8 @@ CPPFLAGS= -c -g -Iinc -Wall -pedantic -std=c++17
 _start_: Dron
 	./Dron
 
-Dron: obj/Dr3D_gnuplot_api.o obj/example.o obj/Wektor.o obj/Macierz.o obj/Prostopadloscian.o obj/MacierzObr.o obj/Dron.o obj/Dno.o obj/Tafla_wody.o obj/Graniastoslup.o obj/Wirnik.o
-	g++ -o Dron obj/example.o obj/Dr3D_gnuplot_api.o obj/Wektor.o obj/Macierz.o obj/Prostopadloscian.o obj/MacierzObr.o obj/Dron.o obj/Dno.o obj/Tafla_wody.o obj/Graniastoslup.o obj/Wirnik.o -lpthread
+Dron: obj/Dr3D_gnuplot_api.o obj/example.o obj/Wektor.o obj/Macierz.o obj/Prostopadloscian.o obj/MacierzObr.o obj/Dron.o obj/Dno.o obj/Tafla_wody.o obj/Graniastoslup.o obj/Wirnik.o obj/Przeszkoda_Prostopadloscian.o
+	g++ -o Dron obj/example.o obj/Dr3D_gnuplot_api.o obj/Wektor.o obj/Macierz.o obj/Prostopadloscian.o obj/MacierzObr.o obj/Dron.o obj/Dno.o obj/Tafla_wody.o obj/Graniastoslup.o obj/Wirnik.o obj/Przeszkoda_Prostopadloscian.o -lpthread
 
 obj/example.o: src/example.cpp inc/Dr3D_gnuplot_api.hh
 	g++ ${CPPFLAGS} -o obj/example.o src/example.cpp
@@ -30,8 +30,17 @@ obj/Prostopadloscian.o: src/Prostopadloscian.cpp inc/Prostopadloscian.hh
 obj/Dron.o: src/Dron.cpp inc/Dron.hh
 	g++ ${CPPFLAGS} -o obj/Dron.o src/Dron.cpp
 
+inc/Dron.hh: inc/Interfejs.hh
+	touch inc/Dron.hh
+
 inc/Prostopadloscian.hh: inc/Bryla.hh
 	touch inc/Prostopadloscian.hh
+
+obj/Przeszkoda_Prostopadloscian.o: src/Przeszkoda_Prostopadloscian.cpp inc/Przeszkoda_Prostopadloscian.hh 
+	g++ ${CPPFLAGS} -o obj/Przeszkoda_Prostopadloscian.o src/Przeszkoda_Prostopadloscian.cpp
+
+inc/Przeszkoda_Prostopadloscian.hh: inc/Przeszkoda.hh
+	touch inc/Przeszkoda_Prostopadloscian.hh
 
 obj/Dno.o: src/Dno.cpp inc/Dno.hh
 	g++ ${CPPFLAGS} -o obj/Dno.o src/Dno.cpp
