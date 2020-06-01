@@ -29,6 +29,18 @@ Dron::Dron (double bokA, double bokB, double bokC)
     Odsuniecie_P = Prawy;
     P.ustaw_pozycja(Prawy);
 }
+
+void Dron::Obroc_L_Wirnik ()
+{
+    L.ustaw_pozycja (Odniesienie - Orientacja * (Odniesienie - Odsuniecie_L)   /*- XD  * Odsuniecie_L + Odsuniecie_L*/);
+    L.ustaw_orientacja (Orientacja);
+}
+
+void Dron::Obroc_P_Wirnik ()
+{
+    P.ustaw_pozycja (Odniesienie - Orientacja * (Odniesienie - Odsuniecie_P) /*- XD * Odsuniecie_P + Odsuniecie_P*/);
+    P.ustaw_orientacja (Orientacja);  
+}
 /*
 void Dron::ObrotX (double kat)
 {
@@ -42,20 +54,20 @@ void Dron::ObrotY (double kat)
 {
     MacierzObr XD (-kat, 'y');
     ustaw_orientacja_razy(XD);
+    //Obroc_L_Wirnik();
+    //Obroc_P_Wirnik();
     L.ustaw_orientacja_razy(XD);
     P.ustaw_orientacja_razy(XD);
     L.Krec_Wirnik (5);
     P.Krec_Wirnik (-5);
-    //L.Obrot_Wirnik_Dron (PozycjaSrodka + Orientacja * Odsuniecie_L, Orientacja);
-    //P.Obrot_Wirnik_Dron (PozycjaSrodka + Orientacja * Odsuniecie_P, Orientacja);
-    //L.Obrot_Wirnik_Dron (Odsuniecie_L, XD, Orientacja);
-    //P.Obrot_Wirnik_Dron (Odsuniecie_P, XD, Orientacja);
 }
 
 void Dron::ObrotZ (double kat)
 {
     MacierzObr XD (-kat, 'z');
     ustaw_orientacja_razy(XD);
+    Obroc_L_Wirnik();
+    Obroc_P_Wirnik();
     L.ustaw_orientacja_razy(XD);
     P.ustaw_orientacja_razy(XD);
     if (kat>=0)
@@ -74,7 +86,8 @@ void Dron::Przesun(double dlugosc)
 {
     Wektor3D ruch (dlugosc, 0, 0);
     ruch = Orientacja * ruch;
-    Odniesienie = Odniesienie + ruch; 
+    Odniesienie = Odniesienie + ruch; //////////
+    //ustaw_pozycja (Odniesienie + ruch); /* TO TAK JAKBY NIWELUJE PROBLEM COFANIA SIE WIRNIKOW, ALE DRON SIE NIE RUSZA*/
     P.Przesun(dlugosc);
     L.Przesun(dlugosc);
     L.Krec_Wirnik(5);

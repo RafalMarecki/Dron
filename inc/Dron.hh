@@ -19,6 +19,8 @@ class Dron : public Prostopadloscian, public Interfejs, public Przeszkoda
 
     public:
     Dron (double bokA, double bokB, double bokC);
+    void Obroc_L_Wirnik ();
+    void Obroc_P_Wirnik ();
     //void ObrotX (double kat) override;
     void ObrotY (double kat) override;
     void ObrotZ (double kat) override;

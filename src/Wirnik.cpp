@@ -31,6 +31,7 @@ void Wirnik::Przesun (double dlugosc)
     Wektor3D ruch (dlugosc,0,0);  
     ruch = Obrot * ruch;  
     ruch = Orientacja * ruch;
+    //ustaw_pozycja (Odniesienie + ruch);/////////////
     Odniesienie = Odniesienie + ruch;
 }
 
@@ -45,13 +46,13 @@ void Wirnik::Obrot_Wirnik (double kat)
     MacierzObr XD (-kat, 'y');
     ustaw_orientacja_razy(XD);
 }
-
+/*
 void Wirnik::Obrot_Wirnik_Dron (Wektor3D Odsuniecie, MacierzObr Obrot, MacierzObr Ort_Drona) 
 {
   Odniesienie = Odniesienie + Ort_Drona * Odsuniecie - Obrot * Odsuniecie + PozycjaSrodka; //- Obrot * Odsuniecie;
   Orientacja = Orientacja * Obrot;
 }
-
+*/
 void Wirnik::get_global_wspolrzedne (Wektor3D Wspolrzedne[]) const
 {
     Wektor3D dodaj_pozycja (-H/2,-Bok/2,-Bok);
