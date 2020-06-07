@@ -86,8 +86,8 @@ void Dron::Przesun(double dlugosc)
 {
     Wektor3D ruch (dlugosc, 0, 0);
     ruch = Orientacja * ruch;
-    Odniesienie = Odniesienie + ruch; //////////
-    //ustaw_pozycja (Odniesienie + ruch); /* TO TAK JAKBY NIWELUJE PROBLEM COFANIA SIE WIRNIKOW, ALE DRON SIE NIE RUSZA*/
+    //Odniesienie = Odniesienie + ruch; //////////
+    ustaw_pozycja (Odniesienie + ruch); /* TO TAK JAKBY NIWELUJE PROBLEM COFANIA SIE WIRNIKOW, ALE DRON SIE NIE RUSZA*/
     P.Przesun(dlugosc);
     L.Przesun(dlugosc);
     L.Krec_Wirnik(5);
@@ -96,12 +96,14 @@ void Dron::Przesun(double dlugosc)
 
 void Dron::Przesun_Anim (shared_ptr<Draw3DAPI> api, double odleglosc)
 {
+    bool kolizja = false;
     if (odleglosc >= 0)
     {
         for (int j=0; j<odleglosc; j++)
         {   
             (*this).Przesun(1); 
             (*this).narysuj(api); 
+            
             if (odleglosc - j > 1)
             api-> erase_shape((*this).id); 
         } 
@@ -112,6 +114,12 @@ void Dron::Przesun_Anim (shared_ptr<Draw3DAPI> api, double odleglosc)
         {   
             (*this).Przesun(-1); 
             (*this).narysuj(api); 
+            /*
+            for (auto elem : kolekcja_przeszkod)
+            {
+                if (elem->czy_kolizja(shared_ptr<>))
+            }
+            */
             if (j < -1)
             api-> erase_shape((*this).id); 
         } 
@@ -178,10 +186,24 @@ void Dron::narysuj (shared_ptr<Draw3DAPI> api)
     L.rysuj(api);
     P.rysuj(api);
 }
-/*
+
 bool Dron::czy_kolizja (shared_ptr<Interfejs> X)
-{}
-*/
+{
+    return 1;
+}
+
+double Dron::wez_promien ()
+{
+    return A/2;
+}
+
+void Dron::ustaw_pozycja1 (const Wektor3D & srodek)
+{
+    ustaw_pozycja(srodek);
+    L.ustaw_pozycja(Odsuniecie_L+srodek);
+    P.ustaw_pozycja(Odsuniecie_P+srodek);
+}
+
 
 
 

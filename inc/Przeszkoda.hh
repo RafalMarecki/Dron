@@ -11,9 +11,11 @@ using drawNS::APIGnuPlot3D;
 using drawNS::Draw3DAPI;
 using namespace std;
 
+class Dron;
+
 class Przeszkoda {
     public:
-    //virtual bool czy_kolizja (shared_ptr<Interfejs> X) = 0;
+    virtual bool czy_kolizja (shared_ptr<Interfejs> X) = 0;
 };
 
 #endif

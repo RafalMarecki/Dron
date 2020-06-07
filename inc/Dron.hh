@@ -16,8 +16,9 @@ class Dron : public Prostopadloscian, public Interfejs, public Przeszkoda
     Wektor3D Odsuniecie_L;
     Wektor3D Odsuniecie_P;
     Dron () {};
-
-    public:
+    vector<shared_ptr<Przeszkoda>> kolekcja_przeszkod;
+    vector<shared_ptr<Interfejs>> kolekcja_dronow;
+    public:    
     Dron (double bokA, double bokB, double bokC);
     void Obroc_L_Wirnik ();
     void Obroc_P_Wirnik ();
@@ -31,11 +32,13 @@ class Dron : public Prostopadloscian, public Interfejs, public Przeszkoda
     void Przesun (double dlugosc) override;
     void Przesun_Anim (shared_ptr<Draw3DAPI> api, double odleglosc) override;
     void narysuj (shared_ptr<Draw3DAPI> api);
-    //bool czy_kolizja (shared_ptr<Interfejs> X) override;
-
-    //void plyn (shared_ptr<Draw3DAPI> api, double odleglosc);
-    //void przesun_o_wektor (Wektor3D & W);
-    //void Przesun (double dlugosc, double kat);
-    //void Przesun_Anim (shared_ptr<Draw3DAPI> api, double odleglosc, double kat);
+    bool czy_kolizja (shared_ptr<Interfejs> X) override;
+    double wez_promien () override;
+    Wektor3D zwroc_odniesienie () override {return Odniesienie;};
+    void ustaw_pozycja1 (const Wektor3D & srodek); //To potrzebne tylko do ustawienia pozycji drona2 na poczatku, bo zwykle ustaw pozycja nie przesuwalo wirników MOŻE TU JEST PROBLEM W WIRNIKACH!!!
+    void set_kolekcja_dronow (vector<shared_ptr<Interfejs>> kolekcja)
+    {kolekcja_dronow = kolekcja;}
+    void set_kolekcja_przeszkod (vector<shared_ptr<Przeszkoda>> kolekcja)
+    {kolekcja_przeszkod = kolekcja;}
 };
 #endif

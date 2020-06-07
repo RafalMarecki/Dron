@@ -31,8 +31,8 @@ void Wirnik::Przesun (double dlugosc)
     Wektor3D ruch (dlugosc,0,0);  
     ruch = Obrot * ruch;  
     ruch = Orientacja * ruch;
-    //ustaw_pozycja (Odniesienie + ruch);/////////////
-    Odniesienie = Odniesienie + ruch;
+    ustaw_pozycja (Odniesienie + ruch);/////////////
+    //Odniesienie = Odniesienie + ruch;
 }
 
 void Wirnik::Krec_Wirnik(double kat)

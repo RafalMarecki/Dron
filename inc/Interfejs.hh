@@ -21,5 +21,7 @@ class Interfejs
     virtual void Obrot_AnimZ (shared_ptr<Draw3DAPI> api, double kat) = 0;
     virtual void plyn (shared_ptr<Draw3DAPI> api, double odleglosc, double kat) = 0;
     virtual void Przesun_Anim (shared_ptr<Draw3DAPI> api, double odleglosc) = 0;
+    virtual double wez_promien () = 0;
+    virtual Wektor3D zwroc_odniesienie () = 0;
 };
 #endif

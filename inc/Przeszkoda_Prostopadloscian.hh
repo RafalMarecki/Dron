@@ -7,10 +7,11 @@
 class Przeszkoda_Prostopadloscian : public Przeszkoda, public Prostopadloscian
 {
     protected:
-    Przeszkoda_Prostopadloscian () {}; /*: Prostopadloscian (A, B, C) {};*/
+    Przeszkoda_Prostopadloscian () {}; 
 
     public:
     Przeszkoda_Prostopadloscian (double AA, double BB, double CC);
+    bool czy_kolizja (shared_ptr<Interfejs> X) override;
     //int rysuj (shared_ptr<Draw3DAPI>);
 };
 

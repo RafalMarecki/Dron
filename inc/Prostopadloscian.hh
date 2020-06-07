@@ -22,6 +22,7 @@ class Prostopadloscian: public Bryla
     void ustaw_orientacja (const MacierzObr & MacObrot);
     void get_global_wspolrzedne (Wektor3D wspolrzedne[]); //
     int rysuj(shared_ptr<Draw3DAPI>) override;
+    double wez_bok (char ktory);
 
     //virtual void ruch(const Wektor3D & Przesuniecie);
     //void ustaw_orientacja_wektor (Wektor3D & Wektor) const; //

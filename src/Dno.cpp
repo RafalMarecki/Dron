@@ -13,3 +13,12 @@ int Dno::rysuj(std::shared_ptr<Draw3DAPI> api)
 	    },"yellow");
 	return id;
 }
+
+bool Dno::czy_kolizja (shared_ptr<Interfejs> X)
+{
+    double glebokosc = -100;
+	Wektor3D Odn = X->zwroc_odniesienie();
+	if (Odn[2] < glebokosc)
+		return true;
+	return false;
+}
