@@ -7,32 +7,6 @@ using namespace std;
 
 #define PI 3.14
 
-
-MacierzObr::MacierzObr(const Macierz<double,3> &M) : Macierz<double,3>(M) 
-{
-  double epsilon = 0.000000001;
-  if(abs(tabM[0] * tabM[1]) > epsilon)
-  {
-    cout << "Macierz nie jest ortonormalna 1" << endl;
-    exit(1);
-  }
-  if(abs(tabM[1] *tabM[2]) > epsilon)
-  {
-    cout << "Macierz nie jest ortonormalna 2" << endl;
-    exit(1);
-  }
-  if(abs(tabM[0] *tabM[2]) > epsilon)
-  {
-    cout << "Macierz nie jest ortonormalna 3" << endl;
-    exit(1);
-  }
-  if(abs((*this).wyznacznik_gauss() - 1) > epsilon)
-  {
-    cout << "Macierz nie jest ortonormalna 4" << endl;
-    exit(1);
-  }
-}
-
 MacierzObr::MacierzObr()
 {
   (*this).jednostkowa();
@@ -75,4 +49,30 @@ MacierzObr::MacierzObr(double stopnie, char os)
     }
   }
 }
+
+/* W sumie to tego jednak nie uzylem
+MacierzObr::MacierzObr(const Macierz<double,3> &M) : Macierz<double,3>(M) 
+{
+  double epsilon = 0.000000001;
+  if(abs(tabM[0] * tabM[1]) > epsilon)
+  {
+    cout << "Macierz nie jest ortonormalna 1" << endl;
+    exit(1);
+  }
+  if(abs(tabM[1] *tabM[2]) > epsilon)
+  {
+    cout << "Macierz nie jest ortonormalna 2" << endl;
+    exit(1);
+  }
+  if(abs(tabM[0] *tabM[2]) > epsilon)
+  {
+    cout << "Macierz nie jest ortonormalna 3" << endl;
+    exit(1);
+  }
+  if(abs((*this).wyznacznik_gauss() - 1) > epsilon)
+  {
+    cout << "Macierz nie jest ortonormalna 4" << endl;
+    exit(1);
+  }
+}*/
 
