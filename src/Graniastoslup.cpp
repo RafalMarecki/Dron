@@ -16,7 +16,7 @@ Graniastoslup::Graniastoslup (double bok, double h)
 void Graniastoslup::get_global_wspolrzedne (Wektor3D Wspolrzedne[]) const
 {
     Wektor3D dodaj_pozycja (-H/2,-Bok/2,-Bok);
-    Wektor3D SrodekGran (Bok/2, Bok/2, H/2);
+    Wektor3D SrodekGran (Bok/2, Bok/2, H/2); //tu w sumie moglaby byc po prostu PozycjaSrodka
     SrodekGran = SrodekGran + dodaj_pozycja;
     Wektor3D tmp = Orientacja * SrodekGran;
     Wektor3D x (H, 0, 0);
