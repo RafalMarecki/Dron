@@ -11,12 +11,12 @@ Przeszkoda_Prostopadloscian::Przeszkoda_Prostopadloscian (double bokA, double bo
 }
 
 bool Przeszkoda_Prostopadloscian::czy_kolizja (shared_ptr<Interfejs> X)
-{
+{/* TO NIE DZIAŁA I TAK
     double R = X->wez_promien();
 
     Wektor3D Odn = X->zwroc_odniesienie();
     if (Odn[0] >  Odniesienie[0] - A/2 - R && Odn[1] >  Odniesienie[1] - B/2 - R && Odn[2] >  Odniesienie[2] - C/2 - R)
     return true;
     
-    return false;
+    return false;*/
 }
